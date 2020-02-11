@@ -51,7 +51,18 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+         # compute index of key
+        index = self._hash_mod(key)
+        # for loop, i in range length of storage
+        for i in range(len(self.storage)):
+            # if index of storage is None and i is index
+            if self.storage[i] == None and i == index:
+                # then set storage of index to key, value
+                self.storage[i] = [ key,value ]
+            # else if i is index (just print for now, collision handling tomorrow)
+            elif i == index:
+                print(f"\nWARNING: Not empty.")
+                return None
 
 
 
@@ -63,7 +74,14 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+         # compute index of key
+        index = self._hash_mod(key)
+        # if the index of storage is None
+        if self.storage[index] is None:
+            # just print for now, collision handling tomorrow
+            print(f"WARNING: Key not found.")
+            return
+        self.storage[index] = None
 
 
     def retrieve(self, key):
@@ -74,7 +92,15 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        # compute index of key
+        index = self._hash_mod(key)
+        # if storage of index is not None
+        if self.storage[index] != None:
+            return self.storage[index]
+        else:
+            # just print for now, collision handling tomorrow
+            print(f"WARNING: Key doesn't match.")
+            return None
 
 
     def resize(self):
@@ -84,8 +110,18 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
-
+        # Doubles the capacity of the hash table & rehash all key/value pairs.
+        self.capacity *= 2
+        new_storage = [None] * self.capacity
+        # for index in range storage // 2
+        for i in range(self.capacity // 2):
+            # set node to storage index
+            node = self.storage[i]
+            # if node is not None, pass for now, collision handling tomorrow
+            if node != None:
+                pass
+        # reassign the referance (change the pointer)
+        self.storage = new_storage
 
 
 if __name__ == "__main__":
